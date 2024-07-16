@@ -3,9 +3,9 @@ const bodyParser = require("body-parser");
 const pool = require("./conexion");
 const datos_usuarios = require("./routes/datos_usuario");
 const emo_men = require("./routes/historial_emociones_mensuales");
-const emo_nega = require("./routes/emo_negativas");
-const emo_pos = require("./routes/emo_positivas");
-const emo_neu = require("./routes/emo_neutras");
+const emo_nega = require("./routes/emociones_negativas");
+const emo_pos = require("./routes/emociones_positivas");
+const emo_neu = require("./routes/emociones_neutras");
 const usuario = require("./routes/usuario");
 const login = require("./routes/login");
 
