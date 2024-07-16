@@ -25,7 +25,7 @@ db.connect(err => {
 });
 
 // Define rutas API
-app.get('/api/items', (req, res) => {
+app.get('/api/', (req, res) => {
   const sql = 'SELECT * FROM datos_usuario';
   db.query(sql, (err, results) => {
     if (err) {
@@ -35,7 +35,7 @@ app.get('/api/items', (req, res) => {
   });
 });
 
-app.post('/api/items', (req, res) => {
+app.post('/api/', (req, res) => {
   const newItem = req.body;
   const sql = 'INSERT INTO datos_usuario SET ?';
   db.query(sql, newItem, (err, result) => {
