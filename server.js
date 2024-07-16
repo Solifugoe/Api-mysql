@@ -25,7 +25,7 @@ db.connect(err => {
 });
 
 // Define rutas API
-app.get('/usuarios', (req, res) => {
+app.get('/api/usuarios', (req, res) => {
   const sql = 'SELECT * FROM datos_usuario';
   db.query(sql, (err, results) => {
     if (err) {
@@ -35,7 +35,7 @@ app.get('/usuarios', (req, res) => {
   });
 });
 
-app.post('/usuarios', (req, res) => {
+app.post('/api/usuarios', (req, res) => {
   const newItem = req.body;
   const sql = 'INSERT INTO datos_usuario SET ?';
   db.query(sql, newItem, (err, result) => {
@@ -47,7 +47,7 @@ app.post('/usuarios', (req, res) => {
 });
 
 // Nueva ruta para datos de emociones
-app.get('/emociones', (req, res) => {
+app.get('/api/emociones', (req, res) => {
   const sqlNegativas = 'SELECT * FROM emociones_negativas';
   const sqlNeutras = 'SELECT * FROM emociones_neutras';
   const sqlPositivas = 'SELECT * FROM emociones_positivas';
@@ -79,7 +79,7 @@ app.get('/emociones', (req, res) => {
 });
 
 // Nueva ruta para datos de historial de emociones mensual
-app.get('/historial-emociones-mensual', (req, res) => {
+app.get('/api/historial-emociones-mensual', (req, res) => {
   const sql = 'SELECT * FROM historial_emociones_mensual';
   db.query(sql, (err, results) => {
     if (err) {
