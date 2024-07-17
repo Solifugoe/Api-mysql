@@ -2,14 +2,14 @@ const express = require('express');
 const mysql = require('mysql2');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Configuración de la conexión a la base de datos
+// Configuración de la conexión a la base de datos usando variables de entorno
 const db = mysql.createConnection({
-  host: 'oaxacapower.org',
-  user: 'u744130986_theraglow',
-  password: 'KaizoIntegradora2024',
-  database: 'u744130986_theraglow'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 // Conectar a la base de datos
@@ -251,7 +251,7 @@ app.get('/historial_emociones_mensual', (req, res) => {
 
 app.post('/historial_emociones_mensual', (req, res) => {
   const { id_usuario, nombre, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre } = req.body;
-  const query = 'INSERT INTO historial_emociones_mensual (id_usuario, nombre, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  const query = 'INSERT INTO historial_emociones_mensual (id_usuario, nombre, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
   db.query(query, [id_usuario, nombre, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre], (err, result) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
@@ -315,11 +315,11 @@ app.post('/login', (req, res) => {
   });
 });
 
-app.put('/login/:correo', (req, res) => {
-  const { correo } = req.params;
-  const { contrasena } = req.body;
-  const query = 'UPDATE login SET contrasena = ? WHERE correo = ?';
-  db.query(query, [contrasena, correo], (err) => {
+app.put('/login/:id', (req, res) => {
+  const { id } = req.params;
+  const { correo, contrasena } = req.body;
+  const query = 'UPDATE login SET correo = ?, contrasena = ? WHERE id = ?';
+  db.query(query, [correo, contrasena, id], (err) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
       res.status(500).json({ error: 'Error ejecutando la consulta' });
@@ -329,10 +329,10 @@ app.put('/login/:correo', (req, res) => {
   });
 });
 
-app.delete('/login/:correo', (req, res) => {
-  const { correo } = req.params;
-  const query = 'DELETE FROM login WHERE correo = ?';
-  db.query(query, [correo], (err) => {
+app.delete('/login/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM login WHERE id = ?';
+  db.query(query, [id], (err) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
       res.status(500).json({ error: 'Error ejecutando la consulta' });
@@ -368,11 +368,11 @@ app.post('/usuario', (req, res) => {
   });
 });
 
-app.put('/usuario/:correo', (req, res) => {
-  const { correo } = req.params;
-  const { contrasena } = req.body;
-  const query = 'UPDATE usuario SET contrasena = ? WHERE correo = ?';
-  db.query(query, [contrasena, correo], (err) => {
+app.put('/usuario/:id', (req, res) => {
+  const { id } = req.params;
+  const { correo, contrasena } = req.body;
+  const query = 'UPDATE usuario SET correo = ?, contrasena = ? WHERE id = ?';
+  db.query(query, [correo, contrasena, id], (err) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
       res.status(500).json({ error: 'Error ejecutando la consulta' });
@@ -382,10 +382,10 @@ app.put('/usuario/:correo', (req, res) => {
   });
 });
 
-app.delete('/usuario/:correo', (req, res) => {
-  const { correo } = req.params;
-  const query = 'DELETE FROM usuario WHERE correo = ?';
-  db.query(query, [correo], (err) => {
+app.delete('/usuario/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM usuario WHERE id = ?';
+  db.query(query, [id], (err) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
       res.status(500).json({ error: 'Error ejecutando la consulta' });
