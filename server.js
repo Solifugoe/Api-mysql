@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Configuración de la conexión a la base de datos usando variables de entorno
+// Configuracion de la conexion a la base de datos usando variables de entorno
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
