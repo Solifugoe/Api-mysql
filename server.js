@@ -23,6 +23,11 @@ db.connect((err) => {
 // Middleware para parsear JSON
 app.use(express.json());
 
+// Ruta raíz
+app.get('/', (req, res) => {
+  res.send('Bienvenido a la API');
+});
+
 // CRUD para login
 app.get('/login', (req, res) => {
   const query = 'SELECT * FROM login';
