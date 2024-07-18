@@ -42,9 +42,9 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const { nombre, correo, contrasena } = req.body;
-  const query = 'INSERT INTO login (nombre, correo, contrasena) VALUES (?, ?, ?)';
-  db.query(query, [nombre, correo, contrasena], (err, result) => {
+  const { correo, contrasena, nombre } = req.body;
+  const query = 'INSERT INTO login (correo, contrasena, nombre) VALUES (?, ?, ?)';
+  db.query(query, [correo, contrasena, nombre], (err, result) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
       res.status(500).json({ error: 'Error ejecutando la consulta', details: err });
@@ -56,9 +56,9 @@ app.post('/login', (req, res) => {
 
 app.put('/login/:id', (req, res) => {
   const { id } = req.params;
-  const { nombre, correo, contrasena } = req.body;
-  const query = 'UPDATE login SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?';
-  db.query(query, [nombre, correo, contrasena, id], (err) => {
+  const { correo, contrasena, nombre } = req.body;
+  const query = 'UPDATE login SET correo = ?, contrasena = ?, nombre = ? WHERE id = ?';
+  db.query(query, [correo, contrasena, nombre], (err) => {
     if (err) {
       console.error('Error ejecutando la consulta:', err);
       res.status(500).json({ error: 'Error ejecutando la consulta', details: err });
